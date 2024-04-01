@@ -8,6 +8,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install antlr.
 
 ```bash
 pip install antlr4-python3-runtime
+pip install antlr4-tools
 ```
 
 ## Usage
