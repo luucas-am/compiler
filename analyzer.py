@@ -1,5 +1,7 @@
 from antlr4 import *
 from CompilerLexer import CompilerLexer
+from CompilerParser import CompilerParser
+from antlr4.tree.Trees import Trees
 
 def valid_cte(token):
     if '+' in token.text or '-' in token.text:
@@ -13,9 +15,12 @@ def valid_cte(token):
     return True
 
 def analyze(input_code:str):
+    breakpoint()
     input_code = input_code.upper()
     input_stream = InputStream(input_code)
     lexer = CompilerLexer(input_stream)
+    token_stream = CommonTokenStream(lexer)
+    parser = CompilerParser(token_stream)
 
     tokens = lexer.getAllTokens()
     for token in tokens:
@@ -28,12 +33,12 @@ def analyze(input_code:str):
                 continue
 
         print(f"Token Name: {token_name}, Token Type: {token.type}, Value: '{token.text}'")
+    tree = parser.prog();
+    tree_str = Trees.toStringTree(tree, None, parser)
+    breakpoint()
 
 if __name__ == '__main__':
     input_code = '''
-    PROGRAM BEGIN
-    // teste
-    VAR abcdefghijklmnopqrstuv := 1 + +11;
-    VAR b := "teste";
+    PROGRAM MyProgram; BEGIN READ (x) END .
     '''
     analyze(input_code)
