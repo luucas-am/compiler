@@ -15,8 +15,6 @@ def valid_cte(token):
     return True
 
 def analyze(input_code:str):
-    breakpoint()
-    input_code = input_code.upper()
     input_stream = InputStream(input_code)
     lexer = CompilerLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
@@ -33,12 +31,18 @@ def analyze(input_code:str):
                 continue
 
         print(f"Token Name: {token_name}, Token Type: {token.type}, Value: '{token.text}'")
-    tree = parser.prog();
+
+    lexer.reset()
+    tree = parser.prog()
     tree_str = Trees.toStringTree(tree, None, parser)
-    breakpoint()
+    print(tree_str)
 
 if __name__ == '__main__':
     input_code = '''
-    PROGRAM MyProgram; BEGIN READ (x) END .
+    PROGRAM MyProgram; 
+    BEGIN 
+        READ
+            ( x ) 
+    END .
     '''
     analyze(input_code)
