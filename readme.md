@@ -32,7 +32,7 @@ WS         : [ \t\r\n]+ -> skip;
 
 Then run the command
 ```bash
-antlr4 MyGrammar.g4
+antlr4 -Dlanguage=Python3 MyGrammar.g4
 ```
 
 ## Contributing
